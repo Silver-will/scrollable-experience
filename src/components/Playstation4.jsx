@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.5.3 public/models/playstation_4_pro/playstation4.glb
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/playstation4.glb')
+export function PS4(props) {
+  const { nodes, materials } = useGLTF('/models/playstation_4_pro/playstation4.glb')
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Playstation_4_Pro_Console_MATERIAL} />

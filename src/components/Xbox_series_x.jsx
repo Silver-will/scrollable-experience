@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.5.3 public/models/xbox_series_x/xbox_series_x.glb
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/xbox_series_x.glb')
+export function Xbox(props) {
+  const { nodes, materials } = useGLTF('/models/xbox_series_x/xbox_series_x.glb')
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.002}>
