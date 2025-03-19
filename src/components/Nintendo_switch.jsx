@@ -7,16 +7,52 @@ import { useGLTF } from '@react-three/drei'
 import React, { useRef } from 'react'
 import { useAnimations } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+
+const useSwitchRef = () => {
+  const myRef = useRef();
+  
+  return myRef;
+}
 
 export function Switch(props) {
-  const group = useRef();
+  const group = useSwitchRef();
   const { nodes, materials } = useGLTF('/models/nintendo_switch/nintendo_switch.glb')
 
+  const tl = gsap.timeline();
+  
+  /*useGSAP(
+    () => {
+      tl.to(
+        group.current.rotation,
+        {
+          duration: 1.5,
+          x: '+=2.56',
+          y: '+=-1.01',
+          z: '+=2',
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: '.section-2',
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: 0.5
+          }
+        }
+      )
+    }
+  );
+
+  */
   useFrame((state, delta) => {
-    if(group.current) group.current.rotation.y += delta * 0.1;
+   if(group.current) group.current.rotation.y += delta * 0.1;
   })
+
+ 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group  ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Plane002_0.geometry} material={materials['Material.004']} />
       <mesh geometry={nodes.Plane002_1.geometry} material={materials['Material.005']} />
       <mesh geometry={nodes.Plane002_2.geometry} material={materials['Material.006']} />
@@ -34,3 +70,5 @@ export function Switch(props) {
 }
 
 useGLTF.preload('/nintendo_switch.glb')
+
+export { useSwitchRef };
